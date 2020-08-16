@@ -1,20 +1,33 @@
 #include <iostream>
-
+#include<algorithm>
+#include<vector>
 using namespace std;
 
 int main()
 {
-    long long s,d;
-    while(scanf("%lld %lld", &s, &d)==2)
+    int n,q,in,c=1;
+    vector<int>num;
+    cin>>n>>q;
+    while(n!=0&&q!=0)
     {
-        int i=s+1,c=s;
-        while(true)
+        cout<<"CASE# "<<c<<":"<<endl;
+        for(int i=0;i<n;i++){ cin>>in; num.push_back(in);}
+
+        sort(num.begin(),num.end());
+        while(q--)
         {
-            if(d<=s) { printf("%lld\n", c); break;}
-            s+=i;
-            i++;
-            c++;
+            cin>>in;
+            int lw=lower_bound(num.begin(),num.end(),in)-num.begin();
+
+            if(num[lw]==in) cout<<in<<" found at "<< (lw+1)<<endl;
+            else cout<<in<<" not found"<<endl;
+
         }
+
+        cin>>n>>q;
+        c++;
+        num.clear();
     }
+
     return 0;
 }
